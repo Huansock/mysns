@@ -175,3 +175,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# go bin
+backend/cmd/api/app
