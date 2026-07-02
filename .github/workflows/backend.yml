@@ -6,8 +6,10 @@ name: Go
 on:
   push:
     branches: [ "main" ]
+    paths: ['backend/**']
   pull_request:
     branches: [ "main" ]
+    paths: ['backend/**']
 
 jobs:
   build:
@@ -17,15 +19,18 @@ jobs:
         working-directory: ./backend
     steps:
     - uses: actions/checkout@v6
-    - name: Setup Go ${{ matrix.go-version }}
+
+    - name: Setup Go
       uses: actions/setup-go@v5
       with:
-        go-version: ${{ matrix.go-version }}
-        cache-dependency-path: subdir/go.sum
+        go-version-file: backend/go.mod 
+        cache-dependency-path: backend/go.sum
+
     - name: Install dependencies
       run: |
         go mod tidy
     # You can test your matrix by printing the current Go version
+    #
     - name: Display Go version
       run: go version
 
